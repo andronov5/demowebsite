@@ -7,165 +7,105 @@
   <meta name="description" content="Join the Website Creation Club to learn modern web design, HTML/CSS/JS, and ship real projects for your school and community." />
   <meta name="color-scheme" content="light dark" />
   <style>
-    /* =====================
-       Design System
-       ===================== */
-    :root {
-      --brand-navy: #0b1f3a;
-      --brand-gold: #f5b83d;
-      --bg: #0b1020;            /* page background for hero */
-      --panel: #0f172a;         /* card surface for hero */
-      --paper: #ffffff;         /* light cards */
-      --ink: #0f172a;           /* primary text */
-      --muted: #475569;         /* secondary text */
-      --line: #e2e8f0;          /* separators */
-      --shadow: 0 10px 30px rgba(2, 6, 23, .18);
-      --radius: 16px;
-      --radius-lg: 24px;
-      --maxw: 1120px;
+    :root{
+      --brand-navy:#0b1f3a; --brand-gold:#f5b83d; --bg:#0b1020; --paper:#ffffff;
+      --ink:#0f172a; --muted:#475569; --line:#e2e8f0; --shadow:0 12px 30px rgba(2,6,23,.18);
+      --radius:16px; --maxw:1120px;
     }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --paper: #0b1220;
-        --ink: #e6edf6;
-        --muted: #a3b1c6;
-        --line: #1f2a3b;
-      }
+    @media (prefers-color-scheme:dark){
+      :root{--paper:#0b1220;--ink:#e6edf6;--muted:#a3b1c6;--line:#1f2a3b}
     }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial,sans-serif;color:var(--ink);
+      background:linear-gradient(180deg,var(--bg) 0%,#0d1530 56%,var(--paper) 56.1%);scroll-behavior:smooth}
+    a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+    .container{width:100%;max-width:var(--maxw);margin-inline:auto;padding:24px}
+    .section{scroll-margin-top:96px}
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
-      color: var(--ink);
-      background: linear-gradient(180deg, var(--bg) 0%, #0d1530 55%, var(--paper) 55.1%);
-      scroll-behavior: smooth;
+    /* Header */
+    header{position:sticky;top:0;z-index:1000;backdrop-filter:saturate(160%) blur(10px);
+      background:color-mix(in oklab,var(--paper) 82%,transparent);border-bottom:1px solid var(--line)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;color:var(--ink)}
+    .brand-mark{width:40px;height:40px;border-radius:12px;background:radial-gradient(120px 120px at 15% 10%,#1b3b72 0,#0d2447 38%,#0b1f3a 100%);position:relative;box-shadow:var(--shadow)}
+    .brand-mark:after{content:"";position:absolute;right:8px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--brand-gold);box-shadow:0 0 0 3px rgba(245,184,61,.28)}
+    nav ul{display:none;gap:8px;list-style:none;margin:0;padding:12px;position:absolute;right:24px;top:64px;background:var(--paper);border:1px solid var(--line);border-radius:12px}
+    nav ul.open{display:grid}
+    nav a{padding:10px 12px;border-radius:10px;color:var(--muted);font-weight:650}
+    nav a.active,nav a:hover{color:var(--ink);background:color-mix(in oklab,var(--brand-gold) 18%,transparent)}
+    .btn{appearance:none;border:none;cursor:pointer;padding:12px 16px;border-radius:12px;font-weight:800;transition:.18s transform,.18s box-shadow,.18s filter}
+    .btn:active{transform:translateY(1px)}
+    .btn-primary{background:linear-gradient(180deg,color-mix(in oklab,var(--brand-gold) 82%,#fff 18%),var(--brand-gold));color:#1a1300;box-shadow:0 6px 20px rgba(245,184,61,.35)}
+    .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+    .btn-glow{background:linear-gradient(180deg,#3b82f6,#1d4ed8);color:#fff;text-transform:uppercase;letter-spacing:.4px;
+      box-shadow:0 10px 30px rgba(59,130,246,.45),0 0 0 3px rgba(59,130,246,.2) inset;border:1px solid rgba(255,255,255,.08)}
+    .btn-glow:hover{filter:brightness(1.05);box-shadow:0 12px 36px rgba(59,130,246,.55),0 0 0 4px rgba(59,130,246,.24) inset}
+    .burger{display:block;background:transparent;width:44px;height:44px;border-radius:10px;border:1px solid var(--line)}
+    .burger-bars{width:22px;height:2px;background:var(--ink);position:relative;display:block;margin:0 auto}
+    .burger-bars:before,.burger-bars:after{content:"";position:absolute;left:0;right:0;height:2px;background:var(--ink)}
+    .burger-bars:before{top:-7px}.burger-bars:after{top:7px}
+
+    /* Hero */
+    .hero{color:#eaf2ff;padding:36px 0 26px;position:relative;isolation:isolate;
+      background:radial-gradient(100% 120% at 0% 0%,#0b1a3a 0%,#0a1229 45%,#070e20 100%)}
+    .hero-wrap{display:grid;grid-template-columns:1fr;align-items:center;gap:16px}
+    .headline{font-weight:1000;letter-spacing:-.02em;line-height:1.08;font-size:clamp(30px,5.2vw,58px)}
+    .sub{color:#c7d6fb;max-width:56ch;font-weight:800;font-size:clamp(18px,2.2vw,22px)}
+    .gridbg{position:absolute;inset:0;z-index:-1;opacity:.18;background-image:linear-gradient(#fff2 1px,transparent 1px),linear-gradient(90deg,#fff2 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(78% 62% at 10% 18%,#000 60%,transparent 70%)}
+
+    /* Sections */
+    main section{padding:40px 0;background:var(--paper)}
+    .alt{background:color-mix(in oklab,var(--paper) 86%,#f2f6ff 14%)}
+    .section-title{font-size:clamp(22px,3.2vw,36px);font-weight:1000;letter-spacing:-.01em;margin:0 0 10px;color:var(--brand-navy)}
+    .section-sub{color:var(--muted);margin:0 0 16px}
+
+    .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    @media (max-width:920px){.cards{grid-template-columns:1fr}}
+
+    .card{background:linear-gradient(180deg,color-mix(in oklab,var(--paper) 92%,#fff 8%),var(--paper));border:1px solid var(--line);
+      border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px}
+    .card h3{margin:0 0 6px;font-size:20px;color:color-mix(in oklab,var(--ink) 92%,var(--brand-navy) 8%)}
+    .card p{margin:0;color:var(--muted)}
+
+    /* Glow bullets (robust) */
+    #about ul, .list{ list-style:none; margin:0; padding-left:0; }
+    #about ul li, .list .li{ position:relative; padding-left:1.6rem; line-height:1.7; }
+    #about ul li::before, .list .li::before{
+      content:""; position:absolute; left:0; top:0.9em; transform:translateY(-50%);
+      width:10px; height:10px; border-radius:50%;
+      background:var(--brand-gold);
+      box-shadow:0 0 0 4px rgba(245,184,61,.25), 0 0 10px rgba(245,184,61,.55);
     }
+    /* Hide old inline .dot spans if present */
+    .list .li .dot{ display:none; }
 
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-    .container { width: 100%; max-width: var(--maxw); margin-inline: auto; padding: 24px; }
-    .section { scroll-margin-top: 96px; }
+    /* Info grid (Meetings) */
+    .info{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    @media (max-width:920px){.info{grid-template-columns:1fr}}
+    .cell{display:flex;gap:10px;align-items:flex-start}
+    .icon{width:24px;height:24px;flex:0 0 24px}
 
-    /* =====================
-       Header / Nav
-       ===================== */
-    .skip-link { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
-    .skip-link:focus { left: 16px; top: 16px; width:auto; height:auto; background:#fff; color:#000; padding:8px 12px; border-radius:8px; z-index:9999; }
-
-    header {
-      position: sticky; top: 0; z-index: 1000;
-      backdrop-filter: saturate(180%) blur(12px);
-      background: color-mix(in oklab, var(--paper) 80%, transparent);
-      border-bottom: 1px solid var(--line);
-    }
-    .nav { display:flex; align-items:center; justify-content:space-between; gap:12px; }
-    .brand { display:flex; align-items:center; gap:12px; font-weight: 800; letter-spacing:.2px; color: var(--ink); }
-    .brand-mark { display:grid; place-items:center; width:40px; height:40px; border-radius:12px; background: radial-gradient(120px 120px at 10% 10%, #1b3b72 0, #0d2447 38%, #0b1f3a 100%); position:relative; box-shadow: var(--shadow); }
-    .brand-mark::after{ content:""; position:absolute; right:8px; top:8px; width:10px; height:10px; border-radius:50%; background: var(--brand-gold); box-shadow:0 0 0 3px rgba(245,184,61,.25);}    
-
-    nav ul { display:flex; gap: 14px; list-style:none; padding:0; margin:0; }
-    nav a { padding:10px 12px; border-radius:10px; color: var(--muted); font-weight:600; }
-    nav a.active, nav a:hover { color: var(--ink); background: color-mix(in oklab, var(--brand-gold) 16%, transparent); }
-
-    .cta { display:flex; gap: 10px; align-items:center; }
-    .btn { appearance:none; border:none; cursor:pointer; padding:12px 16px; border-radius:12px; font-weight:700; transition:.2s transform ease, .2s box-shadow ease, .2s background ease; }
-    .btn:active { transform: translateY(1px); }
-    .btn-primary { background: linear-gradient(180deg, color-mix(in oklab, var(--brand-gold) 82%, #fff 18%), var(--brand-gold)); color:#1a1300; box-shadow: 0 6px 20px rgba(245,184,61,.35); }
-    .btn-primary:hover { filter: brightness(1.05); }
-    .btn-ghost { background: transparent; border:1px solid var(--line); color: var(--ink); }
-
-    /* Mobile nav */
-    .burger { display:none; background:transparent; width:44px; height:44px; border-radius:10px; border:1px solid var(--line); }
-    .burger-bars { width:22px; height:2px; background:var(--ink); position:relative; display:block; margin:0 auto; }
-    .burger-bars::before, .burger-bars::after { content:""; position:absolute; left:0; right:0; height:2px; background:var(--ink); }
-    .burger-bars::before{ top:-7px } .burger-bars::after{ top:7px }
-
-    @media (max-width: 880px) {
-      nav ul { display:none; position:absolute; left:0; right:0; top:64px; background: var(--paper); padding: 12px 24px 18px; border-bottom:1px solid var(--line); }
-      nav ul.open { display:grid; gap:8px; }
-      .burger { display:block; }
-    }
-
-    /* =====================
-       Hero
-       ===================== */
-    .hero { color:#eaf2ff; padding: 40px 0 48px; position:relative; isolation:isolate; }
-    .hero-wrap { display:grid; grid-template-columns: 1.2fr .8fr; align-items:center; gap: 28px; }
-    .headline { font-weight:900; letter-spacing:-.02em; line-height:1.1; font-size: clamp(28px, 5vw, 56px); }
-    .sub { color:#b9c7e8; max-width: 56ch; }
-
-    .stat-grid { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; margin-top: 20px; }
-    .stat { background: linear-gradient(180deg, #111a33, #0b152c); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:16px; text-align:center; box-shadow: inset 0 1px 0 rgba(255,255,255,.04); }
-    .stat .num { font-weight: 900; font-size: clamp(22px, 4vw, 40px); color: #fff; }
-    .stat .label { color:#b6c3de; font-weight:600; letter-spacing:.2px; }
-
-    /* Decorative grid */
-    .gridbg { position:absolute; inset:0; z-index:-1; opacity:.18; background-image: linear-gradient(#fff2 1px, transparent 1px), linear-gradient(90deg, #fff2 1px, transparent 1px); background-size: 40px 40px; mask-image: radial-gradient(80% 60% at 10% 20%, #000 60%, transparent 70%); }
-
-    /* =====================
-       Sections
-       ===================== */
-    main section { padding: 56px 0; background: var(--paper); }
-    #about{ padding-top: 36px; }
-    #join{ padding-top: 40px; }
-    .section-title { font-size: clamp(22px, 3.2vw, 36px); font-weight: 900; letter-spacing: -.01em; margin: 0 0 12px; }
-    .section-sub { color: var(--muted); margin: 0 0 16px; }
-
-    .cards { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
-    @media (max-width: 920px){ .hero-wrap { grid-template-columns: 1fr; } .cards { grid-template-columns: 1fr; } }
-
-    .card { background: linear-gradient(180deg, color-mix(in oklab, var(--paper) 90%, #fff 10%), var(--paper)); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); }
-    .card h3 { margin:0 0 8px; font-size: 20px; }
-    .card p { margin:0; color: var(--muted); }
-
-    .grid-2 { display:grid; grid-template-columns: 1.1fr .9fr; gap: 24px; }
-    @media (max-width: 920px){ .grid-2 { grid-template-columns: 1fr; } }
-
-    .list { display:grid; gap:10px; margin:0; padding:0; list-style:none; }
-    .li { display:flex; gap:10px; align-items:flex-start; }
-    .dot { width:12px; height:12px; border-radius:50%; background: var(--brand-gold); margin-top: 6px; box-shadow:0 0 0 4px rgba(245,184,61,.2); }
-
-    /* Tracks */
-    .track { position:relative; overflow:hidden; }
-    .track::after{ content:""; position:absolute; inset:0; background: radial-gradient(60% 60% at 20% 0%, color-mix(in oklab, var(--brand-gold) 18%, transparent), transparent); pointer-events:none; }
-
-    /* Projects Gallery (placeholders) */
-    .proj { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
-    .shot { border-radius: 14px; aspect-ratio: 16/10; border:1px solid var(--line); background:
-      linear-gradient(180deg, #eef3ff, #eaf0ff) padding-box,
-      linear-gradient(120deg, #dfe8ff, #fff) border-box; display:grid; place-items:center; color:#2b3b6a; font-weight:800; }
-    @media (prefers-color-scheme: dark){ .shot { background: linear-gradient(180deg, #0f172a, #0b1324) padding-box, linear-gradient(120deg, #1b2340, #0d142a) border-box; color:#b8c7f0; } }
-
-    /* Schedule */
-    .info { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
-    @media (max-width: 920px){ .info { grid-template-columns: 1fr; } }
-    .info .cell { display:flex; gap:10px; align-items:flex-start; }
-    .icon { width:24px; height:24px; flex:0 0 24px; }
-
-    .avatar { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 3px solid var(--line); box-shadow: var(--shadow); }
+    /* Avatar — true circle, no stretch */
+    .avatar{width:180px;aspect-ratio:1/1;border-radius:50%;object-fit:cover;border:3px solid var(--line);box-shadow:var(--shadow)}
 
     /* FAQ */
-    details { border:1px solid var(--line); border-radius: 12px; padding: 14px 16px; background: var(--paper); }
-    details + details { margin-top: 10px; }
-    summary { cursor: pointer; font-weight: 700; }
-    summary::-webkit-details-marker { display:none; }
-
-    /* Join */
-    .join-wrap { display:grid; grid-template-columns: 1fr; gap: 24px; }
-    @media (max-width: 920px){ .join-wrap { grid-template-columns: 1fr; } }
-    .qr { border:2px dashed color-mix(in oklab, var(--brand-navy) 35%, var(--line)); border-radius: 14px; aspect-ratio:1/1; display:grid; place-items:center; font-weight:800; color: var(--muted); }
+    details{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--paper)}
+    details+details{margin-top:10px}
+    summary{cursor:pointer;font-weight:900}
+    summary::-webkit-details-marker{display:none}
 
     /* Footer */
-    footer { background: #0b1120; color: #c9d6ff; padding: 28px 0; }
-    .foot { display:flex; align-items:center; justify-content:space-between; gap:12px; }
-    .foot small { color:#99a7c4 }
+    footer{background:#0b1120;color:#c9d6ff;padding:24px 0}
+    .foot{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .foot small{color:#99a7c4}
 
-    /* Reveal on scroll */
-    .reveal { opacity:0; transform: translateY(12px); transition: .6s ease; }
-    .reveal.show { opacity:1; transform: translateY(0); }
+    /* Spacing tweaks (less at the end) */
+    #about{padding-top:32px;padding-bottom:28px}
+    #vision{padding-top:28px;padding-bottom:24px}
+    #meetings{padding-top:26px;padding-bottom:20px}
+    #faq{padding-top:20px;padding-bottom:16px}
+    #join{padding-top:20px;padding-bottom:12px}
   </style>
 </head>
 <body>
@@ -191,92 +131,70 @@
     </div>
   </header>
 
-  <section class="hero" id="top" aria-label="Hero">
-    <div class="gridbg" aria-hidden="true"></div>
-    <div class="container hero-wrap">
-      <div>
-        <h1 class="headline">WEBSITE CREATION CLUB</h1>
-        <p class="sub">No coding experience required. You will work with AI to build a website.</p>
-        <div style="display:flex; gap:10px; margin: 18px 0 8px; flex-wrap:wrap;">
-          <button class="btn btn-ghost" id="openCal">Add next meeting to Google Calendar</button>
-        </div>
-        <div class="label">Active Members</div></div>
-          <div class="stat reveal"><div class="num od" data-target="12">0</div><div class="label">Launched Sites</div></div>
-          <div class="stat reveal"><div class="num od" data-target="18">0</div><div class="label">Workshops / Year</div></div>
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" id="top" aria-label="Hero">
+      <div class="gridbg" aria-hidden="true"></div>
+      <div class="container hero-wrap">
+        <div>
+          <h1 class="headline">WEBSITE CREATION CLUB</h1>
+          <p class="sub">No coding experience required. You will work with AI to build a website.</p>
+          <div style="display:flex;gap:10px;margin:16px 0 0;flex-wrap:wrap;">
+            <button class="btn btn-glow" id="questionsBtn">QUESTIONS?</button>
+          </div>
         </div>
       </div>
-      <div>
-        <div class="card reveal" style="background: linear-gradient(180deg, #112044, #0d1a39); color:#dbe8ff;">
-          <h3 style="margin:0 0 10px; font-size:22px;">What you'll make</h3>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section alt">
+      <div class="container" style="display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:start">
+        <div>
+          <h2 class="section-title">About the Club</h2>
+          <p class="section-sub">We meet biweekly on <strong>THURSDAYS</strong> to learn the basics, collaborate, and build a portfolio you can be proud of.</p>
           <ul class="list">
-            <li class="li"><span class="dot"></span><span>Find a community of mentors and enthusiasts.</span></li>
+            <li class="li"><b>Beginner-friendly</b> workshops that teach by doing.</li>
+            <li class="li"><b>Mentor hours</b> for code reviews and design feedback.</li>
+            <li class="li"><b>Publish</b> with GitHub Pages—free hosting with your own URL.</li>
           </ul>
+          <p class="section-sub" style="margin-top:14px"><b>How we start:</b> super easy. Week 1 is just learning how files work and making a page that says “Good Morning, World!”. Then we add one concept at a time:</p>
+          <p class="section-sub"><b>HTML</b> = the <i>structure</i> of a page (titles, sections, buttons). <b>CSS</b> = the <i>look</i> (colors, spacing, fonts). <b>JavaScript</b> = the <i>behavior</i> (menus that open, forms that submit, things that react when you click).</p>
+          <p class="section-sub"><b>Huge emphasis on AI:</b> it’s the future—so we’ll learn to use AI as a teammate to move faster (not something to “beat”). We’ll prompt for layout ideas, generate starter code, and then edit it by hand so you actually learn.</p>
+          <p class="section-sub"><b>Heads-up about school devices:</b> since AI tools are banned on school computers, we’ll use personal laptops or phones for the AI parts.</p>
         </div>
         <div class="cards">
-          <article class="card track reveal">
-            <h3>Learn the Basics</h3>
-            <p>We’re starting as simple as a blank page that says “Good Morning, World!”—then building up to responsive layouts and interactivity.</p>
-          </article>
-          <article class="card track reveal">
-            <h3>Resume Boost</h3>
-            <p>Not only can you be in a club and work your way up to leadership positions, you’ll also build a library of impressive projects—and learn to build outside of school.</p>
-          </article>
-          <article class="card track reveal">
-            <h3>Career Prep</h3>
-            <p>This can get you ready for technical and non‑technical careers and is a helpful skill to have for any field.</p>
-          </article>
+          <article class="card"><h3>Learn the Basics</h3><p>We’re starting as simple as a blank page that says “Good Morning, World!”—then building up to responsive layouts and interactivity.</p></article>
+          <article class="card"><h3>Resume Boost</h3><p>Work up to leadership roles and build a library of impressive projects—plus learn to build outside of school.</p></article>
+          <article class="card"><h3>Career Prep</h3><p>Useful for technical and non-technical careers; a skill that helps in any field.</p></article>
         </div>
       </div>
     </section>
 
     <!-- Vision -->
     <section id="vision" class="section">
-      <div class="container grid-2">
+      <div class="container" style="display:grid;grid-template-columns:1.1fr .9fr;gap:24px">
         <div>
           <h2 class="section-title">My Vision</h2>
-          <p class="section-sub">Hi, I’m Lera, and I’m super excited about introducing these forward‑facing skills to Northfield. I’m passionate about using technology to our fullest potential as humans—and building super cool things like this website with the help of AI.</p>
+          <p class="section-sub">Hi, I’m Lera, and I’m super excited about introducing these forward-facing skills to Northfield. I’m passionate about using technology to our fullest potential as humans—and building super cool things like this website with the help of AI. Eventually, I want us to build websites for local nonprofits and establishments (and even clubs at Northfield) as a school-led studio—real clients, real impact, real portfolio pieces.</p>
         </div>
-        <div class="card reveal" style="display:grid; place-items:center;">
-          <img src="your-photo.jpg" alt="Lera" class="avatar" />
+        <div class="card" style="display:grid;place-items:center">
+          <img src="lera.jpg" alt="Lera" class="avatar" />
         </div>
       </div>
     </section>
 
-    <!-- Tracks -->
-    
-
-    <!-- Projects -->
-    
-
-    <!-- Schedule -->
-    <section id="meetings" class="section">
+    <!-- Meetings -->
+    <section id="meetings" class="section alt">
       <div class="container">
         <h2 class="section-title">Club Meeting Times</h2>
-        <p class="section-sub">Update these details for your school—everything else works out of the box.</p>
         <div class="info">
-          <div class="card cell reveal">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 2v3M17 2v3M3.5 9h17M5 6h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <div>
-              <h3 style="margin:0 0 6px;">BiWeekly Meeting</h3>
-              <p style="margin:0; color:var(--muted);">Thursdays · Lunch</p>
-            </div>
-          </div>
-          <div class="card cell reveal">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s8-4.5 8-11a8 8 0 1 0-16 0c0 6.5 8 11 8 11Z M12 13a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <div>
-              <h3 style="margin:0 0 6px;">Room</h3>
-              <p style="margin:0; color:var(--muted);">Room B5-215 (Kurpecky’s Room)</p>
-            </div>
-          </div>
-          <div class="card cell reveal">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16M4 12h16M4 19h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <div>
-              <h3 style="margin:0 0 6px;">Contact</h3>
-              <p style="margin:0; color:var(--muted);"><a href="mailto:827015@dpsk12.net">827015@dpsk12.net</a></p>
-            </div>
-          </div>
+          <div class="card cell"><svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 2v3M17 2v3M3.5 9h17M5 6h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><div><h3 style="margin:0 0 6px;">BiWeekly Meeting</h3><p style="margin:0;color:var(--muted);">Thursdays · Lunch</p></div></div>
+          <div class="card cell"><svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s8-4.5 8-11a8 8 0 1 0-16 0c0 6.5 8 11 8 11Z M12 13a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><div><h3 style="margin:0 0 6px;">Room</h3><p style="margin:0;color:var(--muted);">Room B5-215 (Kurpecky’s Room)</p></div></div>
+          <div class="card cell"><svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16M4 12h16M4 19h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><div><h3 style="margin:0 0 6px;">Contact</h3><p style="margin:0;color:var(--muted);"><a href="mailto:827015@dpsk12.net">827015@dpsk12.net</a></p></div></div>
         </div>
-        <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;"><button class="btn btn-primary" id="openCal2">Add to Google Calendar</button></div>
+        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-glow" id="openCal2">ADD NEXT MEETING TO GOOGLE CALENDER</button>
+        </div>
       </div>
     </section>
 
@@ -284,27 +202,23 @@
     <section id="faq" class="section">
       <div class="container">
         <h2 class="section-title">FAQ</h2>
-        <details class="reveal"><summary>Do I need any experience?</summary><p style="margin:8px 0 0; color:var(--muted);">Nope! We teach from the ground up and pair beginners with mentors.</p></details>
-        <details class="reveal"><summary>What will I learn?</summary><p style="margin:8px 0 0; color:var(--muted);">HTML, CSS, JavaScript, design basics, accessibility, performance, and how to publish.</p></details>
-        <details class="reveal"><summary>How much time should I plan?</summary><p style="margin:8px 0 0; color:var(--muted);">Bi‑weekly lunch meetings, plus optional time outside of school.</p></details>
-        <details class="reveal"><summary>Can I use this for college & jobs?</summary><p style="margin:8px 0 0; color:var(--muted);">Absolutely. You’ll build a real portfolio and practice talking about your work.</p></details>
+        <details><summary>Do I need any experience?</summary><p style="margin:8px 0 0;color:var(--muted);">Nope! We teach from the ground up and pair beginners with mentors.</p></details>
+        <details><summary>What will I learn?</summary><p style="margin:8px 0 0;color:var(--muted);">HTML, CSS, JavaScript, design basics, accessibility, performance, and how to publish.</p></details>
+        <details><summary>How much time should I plan?</summary><p style="margin:8px 0 0;color:var(--muted);">Bi-weekly lunch meetings, plus optional time outside of school.</p></details>
+        <details><summary>Can I use this for college & jobs?</summary><p style="margin:8px 0 0;color:var(--muted);">Absolutely! You’ll build a real portfolio and practice talking about your work.</p></details>
       </div>
     </section>
 
     <!-- Join -->
-    <section id="join" class="section">
-      <div class="container join-wrap">
-        <div class="card reveal">
-          <h2 class="section-title" style="margin-bottom:8px;">Join the Club</h2>
+    <section id="join" class="section alt">
+      <div class="container" style="display:grid;grid-template-columns:1fr;gap:14px">
+        <div class="card">
+          <h2 class="section-title" style="margin-bottom:8px">Join the Club</h2>
           <p class="section-sub">Add your email to the Google Form and we’ll send the calendar invite and starter links.</p>
-          <ul class="list" style="margin-top:10px;">
-            <li class="li"><span class="dot"></span><span>Get added to the Discord and project board</span></li>
-            <li class="li"><span class="dot"></span><span>Access templates and design kits</span></li>
-            <li class="li"><span class="dot"></span><span>Find a project team that fits your goals</span></li>
-          </ul>
-          <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;"><a class="btn btn-primary" href="https://forms.gle/your-form-id" target="_blank" rel="noopener">Sign up — Google Form</a></div>
+          <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+            <a id="joinForm" class="btn btn-primary" href="https://forms.gle/your-form-id" target="_blank" rel="noopener">Sign up — Google Form</a>
+          </div>
         </div>
-        
       </div>
     </section>
   </main>
@@ -319,26 +233,26 @@
     </div>
   </footer>
 
-  <!-- Calendar Dialog (no external libs) -->
-  <dialog id="calDialog" style="border:none; border-radius:16px; padding:0; max-width:560px; width:92vw;">
-    <form method="dialog" style="padding:20px; background:var(--paper); color:var(--ink); border:1px solid var(--line); border-radius:16px; box-shadow: var(--shadow);">
-      <h3 style="margin:0 0 6px;">Add Meeting to Calendar</h3>
-      <p style="margin:0 0 12px; color:var(--muted);">Set the next meeting details and download a .ics file.</p>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+  <!-- Calendar Dialog -->
+  <dialog id="calDialog" style="border:none;border-radius:16px;padding:0;max-width:560px;width:92vw">
+    <form method="dialog" style="padding:20px;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)">
+      <h3 style="margin:0 0 6px">Add Meeting to Calendar</h3>
+      <p style="margin:0 0 12px;color:var(--muted)">Set the next meeting details and add to Google Calendar or download an .ics file.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
         <label> Date
-          <input id="calDate" type="date" required style="width:100%; padding:10px; border:1px solid var(--line); border-radius:10px; background:var(--paper); color:var(--ink);" />
+          <input id="calDate" type="date" required style="width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)" />
         </label>
         <label> Start Time
-          <input id="calStart" type="time" value="15:45" required style="width:100%; padding:10px; border:1px solid var(--line); border-radius:10px; background:var(--paper); color:var(--ink);" />
+          <input id="calStart" type="time" value="12:00" required style="width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)" />
         </label>
         <label> Duration (minutes)
-          <input id="calDur" type="number" min="15" max="240" value="60" required style="width:100%; padding:10px; border:1px solid var(--line); border-radius:10px; background:var(--paper); color:var(--ink);" />
+          <input id="calDur" type="number" min="15" max="240" value="60" required style="width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)" />
         </label>
         <label> Location
-          <input id="calLoc" type="text" value="Room 214 — Tech Wing" style="width:100%; padding:10px; border:1px solid var(--line); border-radius:10px; background:var(--paper); color:var(--ink);" />
+          <input id="calLoc" type="text" value="Room B5-215 (Kurpecky’s Room)" style="width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)" />
         </label>
       </div>
-      <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:14px;">
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px">
         <button class="btn btn-ghost">Close</button>
         <button class="btn btn-primary" id="gCal" type="button">Open in Google Calendar</button>
         <button class="btn btn-ghost" id="dlIcs" type="button">Download .ics</button>
@@ -350,7 +264,11 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Mobile nav toggle
+    // Set your Google Form link here (once)
+    const FORM_URL = 'https://forms.gle/your-form-id'; // TODO: paste your real Form URL
+    document.getElementById('joinForm')?.setAttribute('href', FORM_URL);
+
+    // Mobile nav (burger everywhere)
     const burger = document.getElementById('burger');
     const menu = document.getElementById('menu');
     burger?.addEventListener('click', () => {
@@ -358,98 +276,75 @@
       burger.setAttribute('aria-expanded', String(open));
     });
 
-    // Smooth anchor scroll & close mobile menu
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const id = a.getAttribute('href');
-        if (!id || id === '#') return;
-        const el = document.querySelector(id);
-        if (!el) return;
-        e.preventDefault();
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        menu.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
+    // Smooth anchors + close mobile menu
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const id=a.getAttribute('href'); if(!id||id==='#') return;
+        const el=document.querySelector(id); if(!el) return;
+        e.preventDefault(); el.scrollIntoView({behavior:'smooth',block:'start'});
+        menu.classList.remove('open'); burger.setAttribute('aria-expanded','false');
       });
     });
 
-    // Reveal on scroll
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(ent => { if (ent.isIntersecting) ent.target.classList.add('show'); });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    // Simple reveal on scroll
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(ent=>{ if(ent.isIntersecting) ent.target.classList.add('show'); });
+    },{threshold:.12});
+    document.querySelectorAll('.card,details').forEach(el=>io.observe(el));
 
-    // Active link highlight
-    const links = Array.from(document.querySelectorAll('nav a'));
-    const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
-    const onScroll = () => {
-      const y = window.scrollY + 120;
-      let current = sections[0];
-      sections.forEach(sec => { if (sec.offsetTop <= y) current = sec; });
-      links.forEach(l => l.classList.toggle('active', '#' + current.id === l.getAttribute('href')));
-    };
-    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+    // Calendar dialog + Google Calendar + ICS
+    const calDialog=document.getElementById('calDialog');
+    document.getElementById('openCal2')?.addEventListener('click',()=>calDialog.showModal());
 
-    // Calendar dialog + ICS
-    const calDialog = document.getElementById('calDialog');
-    document.getElementById('openCal')?.addEventListener('click', () => calDialog.showModal());
-    document.getElementById('openCal2')?.addEventListener('click', () => calDialog.showModal());
+    const pad=n=>String(n).padStart(2,'0');
+    const fmtG=d=>`${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
+    const toIcsDate=d=>d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'T'+pad(d.getHours())+pad(d.getMinutes())+pad(d.getSeconds());
+    const TZ='America/Denver';
 
-    const pad = n => String(n).padStart(2, '0');
-    const toIcsDate = (d) => {
-      return (
-        d.getFullYear() +
-        pad(d.getMonth() + 1) +
-        pad(d.getDate()) + 'T' +
-        pad(d.getHours()) +
-        pad(d.getMinutes()) +
-        pad(d.getSeconds())
-      );
-    };
-
-    // Google Calendar helper
-    const fmtG = d => `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
-    const TZ = 'America/Denver';
-
-    document.getElementById('gCal')?.addEventListener('click', () => {
-      const date = document.getElementById('calDate').value;
-      const time = document.getElementById('calStart').value || '12:00';
-      const dur = Math.max(15, Number(document.getElementById('calDur').value || 60));
-      const loc = document.getElementById('calLoc').value || 'Room B5-215 (Kurpecky’s Room)';
-      if (!date) return alert('Pick a date first');
-      const [y, m, d] = date.split('-').map(Number);
-      const [hh, mm] = time.split(':').map(Number);
-      const start = new Date(y, m - 1, d, hh, mm, 0);
-      const end = new Date(start.getTime() + dur * 60000);
-      const base = 'https://calendar.google.com/calendar/render';
-      const params = new URLSearchParams({
-        action: 'TEMPLATE',
-        text: 'Website Creation Club — Meeting',
-        dates: `${fmtG(start)}/${fmtG(end)}`,
-        details: 'Bi-weekly club meeting.',
-        location: loc,
-        ctz: TZ
-      });
-      window.open(`${base}?${params.toString()}`, '_blank');
+    document.getElementById('gCal')?.addEventListener('click',()=>{
+      const date=document.getElementById('calDate').value;
+      const time=document.getElementById('calStart').value||'12:00';
+      const dur=Math.max(15,Number(document.getElementById('calDur').value||60));
+      const loc=document.getElementById('calLoc').value||'Room B5-215 (Kurpecky’s Room)';
+      if(!date) return alert('Pick a date first');
+      const [y,m,d]=date.split('-').map(Number);
+      const [hh,mm]=time.split(':').map(Number);
+      const start=new Date(y,m-1,d,hh,mm,0);
+      const end=new Date(start.getTime()+dur*60000);
+      const base='https://calendar.google.com/calendar/render';
+      const params=new URLSearchParams({action:'TEMPLATE',text:'Website Creation Club — Meeting',dates:`${fmtG(start)}/${fmtG(end)}`,details:'Bi-weekly club meeting.',location:loc,ctz:TZ});
+      window.open(`${base}?${params.toString()}`,'_blank');
     });
 
-    document.getElementById('dlIcs')?.addEventListener('click', () => {
-      const date = document.getElementById('calDate').value;
-      const time = document.getElementById('calStart').value || '15:45';
-      const dur = Math.max(15, Number(document.getElementById('calDur').value || 60));
-      const loc = document.getElementById('calLoc').value || 'Room 214 — Tech Wing';
-
-      if (!date) return alert('Pick a date first');
-      const [y, m, d] = date.split('-').map(Number);
-      const [hh, mm] = time.split(':').map(Number);
-      const start = new Date(y, m - 1, d, hh, mm, 0);
-      const end = new Date(start.getTime() + dur * 60000);
-
-      const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Website Creation Club//EN\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\nBEGIN:VEVENT\nUID:${crypto.randomUUID()}\nDTSTAMP:${toIcsDate(new Date())}Z\nDTSTART:${toIcsDate(start)}\nDTEND:${toIcsDate(end)}\nSUMMARY:Website Creation Club — Meeting\nLOCATION:${loc}\nDESCRIPTION:Weekly meeting for the Website Creation Club.\nEND:VEVENT\nEND:VCALENDAR`;
-
-      const blob = new Blob([ics], { type: 'text/calendar' });
-      const url = URL.createObjectURL(blob);
-      const a = Object.assign(document.createElement('a'), { href: url, download: 'wcc-meeting.ics' });
-      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    document.getElementById('dlIcs')?.addEventListener('click',()=>{
+      const date=document.getElementById('calDate').value;
+      const time=document.getElementById('calStart').value||'12:00';
+      const dur=Math.max(15,Number(document.getElementById('calDur').value||60));
+      const loc=document.getElementById('calLoc').value||'Room B5-215 (Kurpecky’s Room)';
+      if(!date) return alert('Pick a date first');
+      const [y,m,d]=date.split('-').map(Number);
+      const [hh,mm]=time.split(':').map(Number);
+      const start=new Date(y,m-1,d,hh,mm,0);
+      const end=new Date(start.getTime()+dur*60000);
+      const ics=`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Website Creation Club//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:${crypto.randomUUID()}
+DTSTAMP:${toIcsDate(new Date())}Z
+DTSTART:${toIcsDate(start)}
+DTEND:${toIcsDate(end)}
+SUMMARY:Website Creation Club — Meeting
+LOCATION:${loc}
+DESCRIPTION:Bi-weekly club meeting.
+END:VEVENT
+END:VCALENDAR`;
+      const blob=new Blob([ics],{type:'text/calendar'});
+      const url=URL.createObjectURL(blob);
+      const a=Object.assign(document.createElement('a'),{href:url,download:'wcc-meeting.ics'});
+      document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
     });
   </script>
 </body>
