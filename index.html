@@ -60,7 +60,17 @@
     .burger-bars{width:22px;height:2px;background:var(--ink);position:relative;display:block;margin:0 auto}
     .burger-bars:before,.burger-bars:after{content:"";position:absolute;left:0;right:0;height:2px;background:var(--ink)}
     .burger-bars:before{top:-7px}.burger-bars:after{top:7px}
-    @media (max-width:880px){nav ul{display:none;position:absolute;left:0;right:0;top:64px;background:var(--paper);padding:12px 24px 18px;border-bottom:1px solid var(--line)}nav ul.open{display:grid;gap:8px}.burger{display:block}}
+
+    /* MOBILE: keep Join button, make it clean */
+    @media (max-width:880px){
+      nav ul{display:none;position:absolute;left:0;right:0;top:64px;background:var(--paper);padding:12px 24px 18px;border-bottom:1px solid var(--line)}
+      nav ul.open{display:grid;gap:8px}
+      .burger{display:block}
+
+      .nav{flex-wrap:wrap;align-items:center;gap:8px}
+      .cta{width:100%;display:flex;justify-content:flex-end}
+      .cta .btn-primary{white-space:nowrap;padding:10px 14px;font-size:14px;border-radius:12px}
+    }
 
     /* Hero */
     .hero{color:#eaf2ff;padding:36px 0 26px;position:relative;isolation:isolate;background:radial-gradient(100% 120% at 0% 0%, #0b1a3a 0%, #0a1229 45%, #070e20 100%);}
@@ -94,24 +104,6 @@
     @media (max-width:920px){.info{grid-template-columns:1fr}}
     .cell{display:flex;gap:10px;align-items:flex-start}
     .icon{width:24px;height:24px;flex:0 0 24px}
-
-    /* Hero logo glyph (navy tile with gold dot) */
-    .hero-logo{ width:160px; height:160px; border-radius:20px; background: radial-gradient(140px 140px at 15% 15%, #1b3b72 0, #0d2447 38%, #0b1f3a 100%); position:relative; box-shadow: var(--shadow), 0 0 60px rgba(59,130,246,.25) inset; }
-    .hero-logo::after{ content:""; position:absolute; right:18px; top:18px; width:18px; height:18px; border-radius:50%; background: var(--brand-gold); box-shadow: 0 0 0 6px rgba(245,184,61,.25), 0 0 24px rgba(245,184,61,.45); }
-    @media (prefers-reduced-motion: no-preference){
-      .hero-logo{ animation: subtlePulse 6s ease-in-out infinite; }
-      @keyframes subtlePulse{ 0%{ transform: translateY(0); filter: saturate(1); } 50%{ transform: translateY(-4px); filter: saturate(1.05);} 100%{ transform: translateY(0); filter: saturate(1);} }
-    }
-
-    /* About layout */
-    .about-grid{ display:grid; grid-template-columns: 1.2fr .8fr; gap:24px; align-items:start; }
-    .about-aside{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:16px; }
-    @media (max-width:920px){ .about-grid{ grid-template-columns:1fr; } .about-aside{ grid-template-columns:1fr; } }
-
-    /* Bulleted list styling (gold dots) */
-    .list{ display:grid; gap:10px; margin:16px 0 0; padding:0; list-style:none; }
-    .li{ display:flex; gap:10px; align-items:flex-start; }
-    .dot{ width:14px; height:14px; border-radius:50%; background: var(--brand-gold); box-shadow:0 0 0 4px rgba(245,184,61,.25); margin-top:6px; }
 
     .avatar{width:180px;height:180px;border-radius:50%;object-fit:cover;border:3px solid var(--line);box-shadow:var(--shadow)}
 
@@ -327,16 +319,6 @@
 
     // Smooth anchors + close mobile menu
     document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const id=a.getAttribute('href');if(!id||id==='#')return;const el=document.querySelector(id);if(!el)return;e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});menu.classList.remove('open');burger.setAttribute('aria-expanded','false');});});
-
-    // Reveal on scroll
-    const io=new IntersectionObserver((entries)=>{entries.forEach(ent=>{if(ent.isIntersecting)ent.target.classList.add('show');});},{threshold:.12});
-    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-    // Active link highlight
-    const links=Array.from(document.querySelectorAll('nav a'));
-    const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
-    const onScroll=()=>{const y=window.scrollY+120;let current=sections[0];sections.forEach(sec=>{if(sec.offsetTop<=y)current=sec;});links.forEach(l=>l.classList.toggle('active','#'+current.id===l.getAttribute('href')));};
-    window.addEventListener('scroll',onScroll,{passive:true});onScroll();
 
     // Prefill next meeting: Sept 4 @ 11:30 AM, 40 min (use next year if date passed)
     const calDialog=document.getElementById('calDialog');
