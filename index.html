@@ -361,7 +361,7 @@
       const time=document.getElementById('calStart').value||'11:30';
       const dur=Math.max(15,Number(document.getElementById('calDur').value||40));
       const loc=document.getElementById('calLoc').value||'Room B5-215 (Kurpecky’s Room)';
-      if(!date) return alert('Pick a date first');
+      if(!date) return alert('Pick a real date');
       const [y,m,d]=date.split('-').map(Number);
       const [hh,mm]=time.split(':').map(Number);
       const start=new Date(y,m-1,d,hh,mm,0);
